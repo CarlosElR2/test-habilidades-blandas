@@ -1,0 +1,74 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8; /* Color de fondo neutro */
+    color: #333; /* Color de texto principal */
+}
+
+header {
+    background-color: #333; /* Color de fondo para el encabezado */
+    color: #fff; /* Color de texto para el encabezado */
+    text-align: center;
+    padding: 20px 0;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #333; /* Color de fondo para el pie de página */
+    color: #fff; /* Color de texto para el pie de página */
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Estilos para el test */
+.question {
+    margin-bottom: 20px;
+}
+
+/* Estilos para los botones */
+button {
+    background-color: #333; /* Color de fondo para los botones */
+    color: #fff; /* Color de texto para los botones */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+button:hover {
+    background-color: #555; /* Cambio de color al pasar el ratón */
+}
+
+button:disabled {
+    background-color: #ccc; /* Color de fondo para botones deshabilitados */
+    cursor: not-allowed;
+}
+
+/* Estilo para las opciones de las preguntas */
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Estilo para el contenido del resultado */
+.result-content {
+    margin-top: 20px;
+}
+
+/* Estilo para los encabezados */
+h1, h2 {
+    color: #333; /* Color de texto para los encabezados */
+}
+
+/* Estilo para el texto del resultado */
+.result-text {
+    font-size: 18px;
+}
+
+/* Añadir más estilos según necesites */
+
