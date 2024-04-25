@@ -1,74 +1,86 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8; /* Color de fondo neutro */
-    color: #493e3e; /* Color de texto principal */
+const questions = [
+    "Estoy comprometido con mi trabajo",
+    "Manejo el estrés fácilmente",
+    "No me preocupa mi futuro",
+    "Pedir ayuda es esencial",
+    "Es más probable que diga que sí a que diga que no",
+    "Puedo pedir fácilmente ayuda a mis compañeros",
+    "No me preocupo por problemas que no puedo manejar",
+    "Puedo adaptar fácilmente mi manera de pensar al cambio",
+    "Puedo recurrir a mis compañeros por cosas relacionadas al trabajo",
+    "Puedo hablar fácilmente de mi trabajo/escuela a mis amigos y familia",
+    "Recuerdo mis triunfos más que mis fracasos",
+    "Me siento confiado que voy a triunfar en una actividad nueva",
+    "No pierdo la confianza en mí mismo cuando algo no sale como lo planee",
+    "Mantengo mis metas en mente aun en situaciones complicadas",
+    "Aprendo de mis fracasos aplicando un enfoque diferente la próxima vez"
+];
+
+const answers = [
+    "Siempre", "A veces", "Nunca"
+];
+
+let currentQuestion = 0;
+let userAnswers = [];
+
+function displayQuestion() {
+    const testContainer = document.getElementById("test-container");
+    testContainer.innerHTML = `
+        <div class="question">${questions[currentQuestion]}</div>
+        <div class="options">
+            ${answers.map(answer => `
+                <label>
+                    <input type="radio" name="answer" value="${answer}">
+                    ${answer}
+                </label>
+            `).join('')}
+        </div>
+        <button onclick="nextQuestion()">Siguiente</button>
+    `;
 }
 
-header {
-    background-color: #333; /* Color de fondo para el encabezado */
-    color: #fff; /* Color de texto para el encabezado */
-    text-align: center;
-    padding: 20px 0;
+function nextQuestion() {
+    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+    if (selectedAnswer) {
+        userAnswers.push(selectedAnswer.value);
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            displayQuestion();
+        } else {
+            displayResult();
+        }
+    } else {
+        alert("Por favor selecciona una respuesta.");
+    }
 }
 
-main {
-    padding: 20px;
+function displayResult() {
+    const resultContainer = document.getElementById("result-container");
+    const totalQuestions = questions.length;
+    const correctAnswers = userAnswers.filter(answer => answer === 'Siempre').length;
+    const percentage = (correctAnswers / totalQuestions) * 100;
+
+    let message;
+    if (percentage >= 70) {
+        message = "¡Felicidades, eres muy resiliente! El cambio no te afecta porque siempre eres positivo, ingenioso y abierto a aprender y tomar nuevos desafíos.";
+    } else if (percentage >= 40) {
+        message = "Puedes adaptarte bien al cambio, pero para dominar la adaptabilidad, piensa cuidadosamente si has considerado la mayoría de las nuevas situaciones y aplicar las estrategias necesarias.";
+    } else {
+        message = "Necesitas mejorar tu capacidad de adaptación. De alguna manera aún resistes el cambio.";
+    }
+
+    resultContainer.innerHTML = `
+        <div class="result">${message}</div>
+        <button onclick="restartTest()">Volver al inicio</button>
+    `;
+    resultContainer.style.display = "block";
 }
 
-footer {
-    background-color: #333; /* Color de fondo para el pie de página */
-    color: #fff; /* Color de texto para el pie de página */
-    text-align: center;
-    padding: 10px 0;
+function restartTest() {
+    currentQuestion = 0;
+    userAnswers = [];
+    document.getElementById("result-container").style.display = "none";
+    displayQuestion();
 }
 
-/* Estilos para el test */
-.question {
-    margin-bottom: 20px;
-}
-
-/* Estilos para los botones */
-button {
-    background-color: #333; /* Color de fondo para los botones */
-    color: #fff; /* Color de texto para los botones */
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px; /* Bordes redondeados */
-}
-
-button:hover {
-    background-color: #555; /* Cambio de color al pasar el ratón */
-}
-
-button:disabled {
-    background-color: #ccc; /* Color de fondo para botones deshabilitados */
-    cursor: not-allowed;
-}
-
-/* Estilo para las opciones de las preguntas */
-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-/* Estilo para el contenido del resultado */
-.result-content {
-    margin-top: 20px;
-}
-
-/* Estilo para los encabezados */
-h1, h2 {
-    color: #4cdcd; /* Color de texto para los encabezados */
-}
-
-/* Estilo para el texto del resultado */
-.result-text {
-    font-size: 18px;
-}
-
-/* Añadir más estilos según necesites */
-
+displayQuestion();
