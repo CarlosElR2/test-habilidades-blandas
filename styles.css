@@ -1,86 +1,151 @@
-const questions = [
-    "Estoy comprometido con mi trabajo",
-    "Manejo el estrés fácilmente",
-    "No me preocupa mi futuro",
-    "Pedir ayuda es esencial",
-    "Es más probable que diga que sí a que diga que no",
-    "Puedo pedir fácilmente ayuda a mis compañeros",
-    "No me preocupo por problemas que no puedo manejar",
-    "Puedo adaptar fácilmente mi manera de pensar al cambio",
-    "Puedo recurrir a mis compañeros por cosas relacionadas al trabajo",
-    "Puedo hablar fácilmente de mi trabajo/escuela a mis amigos y familia",
-    "Recuerdo mis triunfos más que mis fracasos",
-    "Me siento confiado que voy a triunfar en una actividad nueva",
-    "No pierdo la confianza en mí mismo cuando algo no sale como lo planee",
-    "Mantengo mis metas en mente aun en situaciones complicadas",
-    "Aprendo de mis fracasos aplicando un enfoque diferente la próxima vez"
-];
-
-const answers = [
-    "Siempre", "A veces", "Nunca"
-];
-
-let currentQuestion = 0;
-let userAnswers = [];
-
-function displayQuestion() {
-    const testContainer = document.getElementById("test-container");
-    testContainer.innerHTML = `
-        <div class="question">${questions[currentQuestion]}</div>
-        <div class="options">
-            ${answers.map(answer => `
-                <label>
-                    <input type="radio" name="answer" value="${answer}">
-                    ${answer}
-                </label>
-            `).join('')}
-        </div>
-        <button onclick="nextQuestion()">Siguiente</button>
-    `;
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #161414;
+  margin: 0;
+  padding: 0;
 }
 
-function nextQuestion() {
-    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    if (selectedAnswer) {
-        userAnswers.push(selectedAnswer.value);
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-            displayQuestion();
-        } else {
-            displayResult();
-        }
-    } else {
-        alert("Por favor selecciona una respuesta.");
-    }
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-function displayResult() {
-    const resultContainer = document.getElementById("result-container");
-    const totalQuestions = questions.length;
-    const correctAnswers = userAnswers.filter(answer => answer === 'Siempre').length;
-    const percentage = (correctAnswers / totalQuestions) * 100;
-
-    let message;
-    if (percentage >= 70) {
-        message = "¡Felicidades, eres muy resiliente! El cambio no te afecta porque siempre eres positivo, ingenioso y abierto a aprender y tomar nuevos desafíos.";
-    } else if (percentage >= 40) {
-        message = "Puedes adaptarte bien al cambio, pero para dominar la adaptabilidad, piensa cuidadosamente si has considerado la mayoría de las nuevas situaciones y aplicar las estrategias necesarias.";
-    } else {
-        message = "Necesitas mejorar tu capacidad de adaptación. De alguna manera aún resistes el cambio.";
-    }
-
-    resultContainer.innerHTML = `
-        <div class="result">${message}</div>
-        <button onclick="restartTest()">Volver al inicio</button>
-    `;
-    resultContainer.style.display = "block";
+header {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-function restartTest() {
-    currentQuestion = 0;
-    userAnswers = [];
-    document.getElementById("result-container").style.display = "none";
-    displayQuestion();
+h1 {
+  color: #ebe8e8;
+  font-size: 36px;
+  margin: 0;
+  padding: 10px 0;
 }
 
-displayQuestion();
+.content {
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #b48c8c;
+  color: rgb(192, 19, 19);
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #dd2929;
+}
+
+#test-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.question {
+font-size: 20px;
+  margin-bottom: 20px
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+}
+
+.options label {
+  display: inline-block;
+  background-color: transparent; /* Fondo transparente */
+  color: #333; /* Color del texto */
+  border: 2px solid #333; /* Borde sólido */
+  border-radius: 5px; /* Borde redondeado */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Cursor al pasar el ratón */
+  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+  padding: 10px 20px; /* Espaciado interno */
+  margin: 5px; 
+  
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  background-color: #d64141;
+  color: rgb(110, 43, 43);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #9e1a1a;
+}
+
+.result {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.result-message {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #e4e1e1;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+footer p {
+  font-size: 14px;
+  color: #fdcccc;
+}
+#video-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 90%;
+  min-height: 90%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+/* Estilo para el botón de créditos */
+.btn-credits {
+  display: inline-block;
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Borde redondeado */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Cursor al pasar el ratón */
+  transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+.btn-credits:hover {
+  background-color: #0056b3; /* Cambio de color al pasar el ratón */
+}
