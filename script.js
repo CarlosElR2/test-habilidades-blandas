@@ -29,28 +29,32 @@ function displayQuestion() {
         <div class="question">${questions[currentQuestion]}</div>
         <div class="options">
             ${answers.map(answer => `
-                <label>
-                    <input type="radio" name="answer" value="${answer}">
-                    ${answer}
-                </label>
+                <button class="option-btn" value="${answer}" onclick="selectAnswer('${answer}')">${answer}</button>
             `).join('')}
         </div>
         <button onclick="nextQuestion()">Siguiente</button>
     `;
 }
 
+function selectAnswer(selectedAnswer) {
+    userAnswers.push(selectedAnswer);
+    // Obtenemos todos los botones de las opciones
+    const optionButtons = document.querySelectorAll('.option-btn');
+    // Quitamos la clase 'selected' de todos los botones
+    optionButtons.forEach(button => {
+        button.classList.remove('selected');
+    });
+    // Agregamos la clase 'selected' al botón seleccionado
+    const selectedButton = document.querySelector(`.option-btn[value="${selectedAnswer}"]`);
+    selectedButton.classList.add('selected');
+}
+
 function nextQuestion() {
-    const selectedAnswer = document.querySelector('input[name="answer"]:checked');
-    if (selectedAnswer) {
-        userAnswers.push(selectedAnswer.value);
-        currentQuestion++;
-        if (currentQuestion < questions.length) {
-            displayQuestion();
-        } else {
-            displayResult();
-        }
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayQuestion();
     } else {
-        alert("Por favor selecciona una respuesta.");
+        displayResult();
     }
 }
 
@@ -84,3 +88,18 @@ function restartTest() {
 }
 
 displayQuestion();
+function nextQuestion() {
+    const selectedAnswer = document.querySelector('button.option-btn.selected');
+    if (!selectedAnswer) {
+        alert("Por favor selecciona una opción.");
+        return; // Detenemos la función si no hay opción seleccionada
+    }
+    
+    userAnswers.push(selectedAnswer.value);
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        displayQuestion();
+    } else {
+        displayResult();
+    }
+}
