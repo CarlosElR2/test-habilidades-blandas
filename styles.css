@@ -1,6 +1,6 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #161414;
+  background-color: transparent;
   margin: 0;
   padding: 0;
 }
@@ -57,30 +57,36 @@ p {
 }
 
 .question {
-font-size: 20px;
-  margin-bottom: 20px
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
 .options {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  
 }
 
-.options label {
-  display: inline-block;
-  background-color: transparent; /* Fondo transparente */
-  color: #333; /* Color del texto */
-  border: 2px solid #333; /* Borde sólido */
+.option-btn {
+  background-color: transparent;
+  color: #000000; /* Color del texto */
+  border: 2px solid #000000; /* Borde sólido */
   border-radius: 5px; /* Borde redondeado */
   text-decoration: none; /* Sin subrayado */
   font-size: 16px; /* Tamaño del texto */
   cursor: pointer; /* Cursor al pasar el ratón */
   transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
   padding: 10px 20px; /* Espaciado interno */
-  margin: 5px; 
-  
+  margin: 5px;
+}
+
+.option-btn.selected {
+  background-color: #dd2929; /* Cambiamos el color de fondo cuando está seleccionada */
+  color: #fff; /* Cambiamos el color del texto cuando está seleccionada */
+}
+
+.option-btn:hover {
+  background-color: rgba(235, 235, 235, 0.3); /* Cambio de color al pasar el ratón */
 }
 
 button {
@@ -122,6 +128,7 @@ footer p {
   font-size: 14px;
   color: #fdcccc;
 }
+
 #video-background {
   position: fixed;
   right: 0;
@@ -132,6 +139,7 @@ footer p {
   height: auto;
   z-index: -1;
 }
+
 /* Estilo para el botón de créditos */
 .btn-credits {
   display: inline-block;
@@ -148,4 +156,98 @@ footer p {
 
 .btn-credits:hover {
   background-color: #0056b3; /* Cambio de color al pasar el ratón */
+}
+.header {
+  position: relative; /* Establece el contexto de posicionamiento para el logo */
+  padding-top: 30px; /* Ajusta el espacio sobre el título para que no se superponga con el logo */
+}
+
+.logo {
+  position: absolute; /* Posiciona el logo de forma absoluta */
+  top: -350px; /* Distancia desde la parte superior */
+  left: -600px; /* Distancia desde la izquierda */
+  width: 300px; /* Ancho del logo (ajusta según el tamaño de tu logo) */
+  height: auto; /* Altura automática para mantener la proporción */
+}
+header h1 {
+  color: #ffffff; /* Cambia el color a blanco */
+}
+
+/* Cambia el color del texto del párrafo */
+.content p {
+  color: #ffffff; /* Cambia el color a blanco */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #161414;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #ebe8e8;
+  font-size: 36px;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.content {
+  text-align: center;
+  color: #ffffff;
+}
+
+p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+footer p {
+  font-size: 14px;
+  color: #fdcccc;
+}
+
+#video-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 90%;
+  min-height: 90%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+/* En el archivo styles.css */
+
+#video-background {
+  position: absolute; /* Cambia a posición absoluta */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ajusta al ancho completo del contenedor */
+  height: 100%; /* Ajusta a la altura completa del contenedor */
+  z-index: -1; /* Asegura que el video esté detrás de otros elementos */
+  object-fit: cover; /* Ajusta el tamaño del video para cubrir el contenedor */
 }
